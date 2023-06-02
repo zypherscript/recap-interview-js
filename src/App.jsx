@@ -4,7 +4,10 @@ import { arrInfoList } from './arrInfo.js';
 
 function App() {
   return (
-    <ArrInfo />
+    <>
+      <ArrInfo />
+      <Form />
+    </>
   )
 }
 
@@ -66,6 +69,74 @@ function ArrInfo() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Form() {
+  const [answer, setAnswer] = useState('');
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState('typing');
+
+  if (status === 'success') {
+    return <h1>That's right! (Even if we apply to be a Java Developer, we also need to know about the frontend stuff tooooooooooooooooooo)</h1>
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      await submitForm(answer);
+      setStatus('success');
+    } catch (err) {
+      setStatus('typing');
+      setError(err);
+    }
+  }
+
+  function handleTextareaChange(e) {
+    setAnswer(e.target.value);
+  }
+
+  function submitForm(answer) {
+    // Pretend it's hitting the network.
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let shouldError = answer.toLowerCase() !== 'react'
+        if (shouldError) {
+          reject(new Error('Good guess but a wrong answer. Try again!'));
+        } else {
+          resolve();
+        }
+      }, 1500);
+    });
+  }
+
+  return (
+    <>
+      <h2>Easy quiz</h2>
+      <p>
+        What is the frontend framework we are learning now?
+      </p>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={answer}
+          onChange={handleTextareaChange}
+          disabled={status === 'submitting'}
+        />
+        <br />
+        <button disabled={
+          answer.length === 0 ||
+          status === 'submitting'
+        }>
+          Submit
+        </button>
+        {error !== null &&
+          <p className="Error">
+            {error.message}
+          </p>
+        }
+      </form>
+    </>
   );
 }
 
