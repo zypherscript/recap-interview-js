@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { arrInfoList } from './arrInfo.js';
+import PersonList from './components/PersonList';
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <QuizForm />
       <h2 className="text-2xl font-medium text-gray-900 title-font mb-2 text-left">CSS/SaSS</h2>
       <Accordion />
+      <h2 className="text-2xl font-medium text-gray-900 title-font mb-2 text-left">Axios 101</h2>
+      <PersonList />
     </>
   )
 }
