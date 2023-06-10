@@ -1,5 +1,5 @@
 import './App.css'
-import PersonList from './components/PersonList';
+import PersonList from './components/PersonList/PersonList';
 import Accordion from './components/Accordion';
 import QuizForm from './components/QuizForm';
 import ArrInfo from './components/ArrInfo';
